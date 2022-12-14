@@ -9,12 +9,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
 
-CHROME_DRIVER_PATH = "./driver/chromedriver.exe"
-CHROME_PATH = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
-ROUTER_IP = "http://192.168.100.1"
-USERNAME="kaenova"
-PASSWORD="Wacepong123"
-
 class Bot:
     __driver: webdriver.Chrome
     __username: str
