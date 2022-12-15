@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import re
 import requests
 import os
@@ -35,7 +37,7 @@ class Bot:
     @staticmethod
     def log(name:str, log):
         now = datetime.now()
-        current_time = now.strftime("%d/%m//%Y, %H:%M:%S")
+        current_time = now.strftime("%d/%m/%Y, %H:%M:%S")
         print(f"[{current_time}][{name}] {log}")
         
     def run(self):
