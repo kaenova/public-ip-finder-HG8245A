@@ -2,8 +2,9 @@ import re
 import requests
 import os
 
-from dotenv import load_dotenv
 from time import sleep
+from datetime import datetime
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.alert import Alert
@@ -30,15 +31,21 @@ class Bot:
         chrome_options.binary_location = chrome_path
 
         self.__driver = webdriver.Chrome(executable_path=driver_path, options=chrome_options)
+    
+    @staticmethod
+    def log(name:str, log):
+        now = datetime.now()
+        current_time = now.strftime("%d/%m//%Y, %H:%M:%S")
+        print(f"[{current_time}][{name}] {log}")
         
     def run(self):
         while True:
-            print(f"Last detected IP: {self.current_ip}")
+            Bot.log("INFO", f"Last detected IP: {self.current_ip}")
             if self.check_modem_alive():
                 self.login()
                 try:
                     self.check_current_ip()
-                    print(f"Detected IP: {self.current_ip}")
+                    Bot.log("INFO", f"Detected IP: {self.current_ip}")
                     if self.is_restart(self.current_ip):
                         self.restart()
                     else:
@@ -46,16 +53,17 @@ class Bot:
                         self.logout()
                 except Exception as e:
                     print(f"Exception: {e}")
-            print("Checking again in 20 seconds")
+            Bot.log("INFO", f"Will Check agian in 20 seconds")
             sleep(20)
                 
     def check_modem_alive(self) -> bool:
+        Bot.log("MODEM_CHECK", f"Checking modem")
         try:
             requests.get(f'{self.__router_ip}', verify=False, timeout=5)
-            print("Modem is alive")
+            Bot.log("MODEM_CHECK", f"Alive")
             return True
         except:
-            print("Modem is not alive")
+            Bot.log("MODEM_CHECK", f"Dead")
             self.current_ip = None
             return False
 
@@ -80,7 +88,7 @@ class Bot:
         self.__driver.switch_to.frame(iframe_content)
         self.__driver.find_element(By.ID, "btnReboot").click()
         alert = Alert(self.__driver)
-        print("Restarting modem")
+        Bot.log("RESTART", f"Restarting modem")
         alert.accept()
         self.__driver.switch_to.default_content()
         # Set current state
@@ -98,13 +106,14 @@ class Bot:
         self.__driver.find_element(By.ID, "button").click()
         sleep(3)
         if self.__driver.current_url == f"{self.__router_ip}/index.asp":
-            print("Login successfull")
+            Bot.log("Login", f"Success")
         else:
+            Bot.log("Login", f"Failed")
             raise Exception("Login Failed")
     
     def logout(self):
         if (self.__driver.current_url == f"{self.__router_ip}/"):
-            print("Already logged out")
+            Bot.log("Logout", f"Already logged out")
             return
         logout_button = self.__driver.find_elements(By.ID, "headerLogoutText")
         if len(logout_button) < 1:
@@ -161,8 +170,6 @@ if __name__ == "__main__":
     username = get_env("ADMIN_USERNAME", "telecomadmin")
     password = get_env("ADMIN_PASSWORD", "admintelecom")
     wan = get_env("WAN_NAME", "2_INTERNET_R_VID_200")
-    
-    print(username)
     
     agent = Bot(chrome_driver_path, chrome_path, router_ip, username, password, wan)
     agent.run()

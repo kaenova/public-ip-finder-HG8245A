@@ -1,0 +1,68 @@
+Loading environment
+kaenova
+Init bot
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: 10.39.149.154
+Restarting modem
+Checking again in 20 seconds
+Last detected IP: None
+Modem is not alive
+Checking again in 20 seconds
+Last detected IP: None
+Modem is not alive
+Checking again in 20 seconds
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: None
+Checking again in 20 seconds
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: 10.39.137.23
+Restarting modem
+Checking again in 20 seconds
+Last detected IP: None
+Modem is not alive
+Checking again in 20 seconds
+Last detected IP: None
+Modem is not alive
+Checking again in 20 seconds
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: None
+Checking again in 20 seconds
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: 10.39.149.154
+Restarting modem
+Checking again in 20 seconds
+Last detected IP: None
+Modem is not alive
+Checking again in 20 seconds
+Last detected IP: None
+Modem is not alive
+Checking again in 20 seconds
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: None
+Checking again in 20 seconds
+Last detected IP: None
+Modem is alive
+Login successfull
+Detected IP: 10.39.134.191
+Restarting modem
+Checking again in 20 seconds
+Loading environment
+Init bot
+[INFO] Last detected IP: None
+[MODEM_CHECK] Checking modem
+[MODEM_CHECK] Alive
+[Login] Success
+[INFO] Detected IP: None
+[INFO] Will Check agian in 20 seconds
